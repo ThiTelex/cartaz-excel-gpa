@@ -298,7 +298,7 @@ function cartMarkup(r){
       <div class="mode-note">${esc(r.dynDesc||'')}</div>
     </div>
     <div class="cart-desc">${esc(r.desc||'')}</div>
-    ${hasDePor?`<div class="cart-pricing"><div class="de-price"><span>DE:</span> <s>${money(r.de)}</s></div><div class="promo-box">${esc(r.dynDesc||'')}</div><div class="promo-phrase">${promoPhrase}</div><div class="por-price"><span>POR:</span> ${money(r.price)}</div>${r.validity?`<div class="validity-phrase">${esc(r.validity)}</div>`:""}</div>`:`<div class="cart-pricing"><div class="price">${money(r.price)}</div></div>`}
+    ${hasDePor?`<div class="cart-pricing"><div class="de-price"><span>DE:</span> <s>${money(r.de)}</s></div><div class="promo-box"><svg class="promo-box-bg" viewBox="0 0 100 100" preserveAspectRatio="none" aria-hidden="true"><rect x="0" y="0" width="100" height="100" fill="#202124"></rect></svg><span class="promo-box-text">${esc(r.dynDesc||'')}</span></div><div class="promo-phrase">${promoPhrase}</div><div class="por-price"><span>POR:</span> ${money(r.price)}</div>${r.validity?`<div class="validity-phrase">${esc(r.validity)}</div>`:""}</div>`:`<div class="cart-pricing"><div class="price">${money(r.price)}</div></div>`}
     <div class="cart-code"><div class="plu">PLU ${esc(r.plu||'')}</div>${code39SVG(String(r.plu),190,34)}</div>
   </article>`
 }
