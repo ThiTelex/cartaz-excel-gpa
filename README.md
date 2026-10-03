@@ -155,3 +155,9 @@ Como este é um aplicativo HTML/JavaScript executado no navegador, `config.json`
 - O contorno externo de cada cartaz A7 não é impresso e também não aparece no PDF exportado.
 - A caixa preta da dinâmica (`promo-box`) continua sendo impressa/exportada.
 - `Exportar todos em PDF` gera um único arquivo PDF com **todos os cartazes**, em páginas A4 horizontais, 8 cartazes por página. Não depende da página atualmente selecionada na pré-visualização.
+
+## v22 — Caixa da dinâmica na impressão
+- Mantém a borda externa do cartaz A7 somente na pré-visualização.
+- Remove a borda externa na impressão física.
+- Força a preservação do fundo preto e texto branco da caixa `.promo-box` na impressão com `print-color-adjust: exact` e `-webkit-print-color-adjust: exact`.
+- O PDF continua sem a borda externa e com a caixa preta da dinâmica.

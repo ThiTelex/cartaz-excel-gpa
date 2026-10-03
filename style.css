@@ -262,8 +262,25 @@ body.auth-locked>header,body.auth-locked>.steps,body.auth-locked>main,body.auth-
 /* v21: o contorno externo do cartaz A7 não sai na impressão nem no PDF.
    A caixa preta da dinâmica (.promo-box) permanece normalmente. */
 @media print{
+  /* O contorno físico do cartaz já existe na folha A7; não imprimir a borda externa. */
   body:not(.printing-cod) #impressao .cartaz{border:0!important}
-  body:not(.printing-cod) #impressao .promo-box{background:#202124!important;color:#fff!important}
+
+  /* A caixa da dinâmica faz parte do cartaz e DEVE sair na impressão.
+     Força a preservação das cores mesmo em navegadores que desativam
+     gráficos de fundo por padrão. */
+  body:not(.printing-cod) #impressao .promo-box{
+    background:#202124!important;
+    background-color:#202124!important;
+    color:#fff!important;
+    -webkit-print-color-adjust:exact!important;
+    print-color-adjust:exact!important;
+    forced-color-adjust:none!important;
+  }
 }
+
 .pdf-rendering .cartaz{border:0!important}
-.pdf-rendering .promo-box{background:#202124!important;color:#fff!important}
+.pdf-rendering .promo-box{
+  background:#202124!important;
+  background-color:#202124!important;
+  color:#fff!important;
+}
