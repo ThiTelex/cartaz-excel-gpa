@@ -298,16 +298,16 @@ body.auth-locked>header,body.auth-locked>.steps,body.auth-locked>main,body.auth-
     padding:0!important;
     margin:0!important;
     gap:0!important;
-    grid-template-columns:repeat(4,74.25mm)!important;
+    grid-template-columns:repeat(4,73.75mm)!important;
     grid-template-rows:repeat(2,105mm)!important;
     box-shadow:none!important;
     overflow:hidden!important;
   }
   body:not(.printing-cod) #impressao .cartaz{
-    width:74.25mm!important;
+    width:73.75mm!important;
     height:105mm!important;
-    min-width:74.25mm!important;
-    max-width:74.25mm!important;
+    min-width:73.75mm!important;
+    max-width:73.75mm!important;
     min-height:105mm!important;
     max-height:105mm!important;
     margin:0!important;
@@ -327,16 +327,33 @@ body.auth-locked>header,body.auth-locked>.steps,body.auth-locked>main,body.auth-
   padding:0!important;
   margin:0!important;
   gap:0!important;
-  grid-template-columns:repeat(4,74.25mm)!important;
+  grid-template-columns:repeat(4,73.75mm)!important;
   grid-template-rows:repeat(2,105mm)!important;
 }
 .pdf-rendering .pdf-page .cartaz{
-  width:74.25mm!important;
+  width:73.75mm!important;
   height:105mm!important;
-  min-width:74.25mm!important;
-  max-width:74.25mm!important;
+  min-width:73.75mm!important;
+  max-width:73.75mm!important;
   min-height:105mm!important;
   max-height:105mm!important;
   margin:0!important;
   border:0!important;
+}
+
+
+/* v25 — pequeno vão central entre as colunas 2 e 3, preservando as margens externas.
+   Cada cartaz passa a 73,75 mm; as colunas 3 e 4 são deslocadas 2 mm para a direita.
+   Resultado: 73,75 x 4 + 2 mm = 297 mm, sem empurrar a coluna 1 para dentro nem deixar a 4ª recuada. */
+@media print{
+  body:not(.printing-cod) #impressao .a4 .cartaz:nth-child(4n+3),
+  body:not(.printing-cod) #impressao .a4 .cartaz:nth-child(4n+4),
+  body:not(.printing-cod) #impressao #printAllArea .a4 .cartaz:nth-child(4n+3),
+  body:not(.printing-cod) #impressao #printAllArea .a4 .cartaz:nth-child(4n+4){
+    margin-left:2mm!important;
+  }
+}
+.pdf-rendering .pdf-page .cartaz:nth-child(4n+3),
+.pdf-rendering .pdf-page .cartaz:nth-child(4n+4){
+  margin-left:2mm!important;
 }
