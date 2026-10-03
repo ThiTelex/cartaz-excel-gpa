@@ -122,11 +122,10 @@ $("search").oninput=renderTable;$("dynFilter").onchange=renderTable;
 document.querySelectorAll(".mode").forEach(b=>b.onclick=()=>{document.querySelectorAll(".mode").forEach(x=>x.classList.remove("active"));b.classList.add("active");mode=b.dataset.mode;});
 $("rebuild").onclick=()=>{buildCarts();showPage("impressao")};
 $("printBtn").onclick=()=>printSection("impressao");
-$("pdfBtn").onclick=exportCartazesPDF;
 $("prevPage").onclick=()=>changePage(-1);
 $("nextPage").onclick=()=>changePage(1);
 $("codPrint").onclick=()=>printSection("cod");
-window.addEventListener("afterprint",()=>{document.body.classList.remove("printing-cod");printMode="current"});
+window.addEventListener("afterprint",()=>{document.body.classList.remove("printing-cod","printing-all");$("printAllArea").innerHTML="";$("printAllArea").setAttribute("aria-hidden","true");printMode="current"});
 function printSection(section){
   printMode="current";
   document.body.classList.toggle("printing-cod",section==="cod");
@@ -329,27 +328,12 @@ function renderCOD(){
   $("codPrintArea").innerHTML=grid;
 }
 
-async function exportCartazesPDF(){
+function printAllSections(){
   if(!carts.length){alert("Gere os cartazes primeiro.");return}
-  if(!window.html2canvas || !window.jspdf){alert("A biblioteca de PDF não foi carregada. Verifique a conexão com a internet e tente novamente.");return}
-  const btn=$("pdfBtn");btn.disabled=true;btn.textContent="Gerando PDF...";
-  try{
-    const {jsPDF}=window.jspdf;
-    const pdf=new jsPDF({orientation:"landscape",unit:"mm",format:"a4",compress:true});
-    const pages=Math.ceil(carts.length/8);
-    const host=$("pdfRenderArea");
-    host.innerHTML="";host.classList.add("pdf-rendering");
-    for(let i=0;i<pages;i++){
-      host.innerHTML=`<div class="a4 pdf-page">${carts.slice(i*8,i*8+8).map(cartMarkup).join("")}</div>`;
-      const canvas=await html2canvas(host.querySelector(".pdf-page"),{scale:2,backgroundColor:"#ffffff",useCORS:true});
-      const img=canvas.toDataURL("image/jpeg",0.95);
-      if(i)pdf.addPage("a4","landscape");
-      pdf.addImage(img,"JPEG",0,0,297,210);
-    }
-    const base=(selectedFile?.name||"cartazes").replace(/\.[^.]+$/i,"");
-    pdf.save(`${base}-A7-cartazes.pdf`);
-  }catch(err){console.error(err);alert("Não foi possível gerar o PDF.\n\n"+(err.message||err));}
-  finally{host.innerHTML="";host.classList.remove("pdf-rendering");btn.disabled=false;btn.textContent="Exportar todos em PDF"}
+  renderAllPrintPages();
+  printMode="all";
+  document.body.classList.add("printing-all");
+  window.print();
 }
 
 // Code 39 em SVG: não depende de fonte instalada no Android/Windows.

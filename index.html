@@ -9,8 +9,6 @@
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Rounded:opsz,wght,FILL,GRAD@20..48,400,0,0" rel="stylesheet">
 <script src="https://cdn.jsdelivr.net/npm/xlsx@0.18.5/dist/xlsx.full.min.js"></script>
-<script src="https://cdn.jsdelivr.net/npm/html2canvas@1.4.1/dist/html2canvas.min.js"></script>
-<script src="https://cdn.jsdelivr.net/npm/jspdf@2.5.1/dist/jspdf.umd.min.js"></script>
 </head>
 <body>
 <div id="loginScreen" class="login-screen" aria-modal="true" role="dialog" aria-labelledby="loginTitle">
@@ -129,7 +127,7 @@
     <button id="nextPage" type="button" aria-label="Próxima página"><span class="material-symbols-rounded" aria-hidden="true">chevron_right</span></button>
     <span id="pageInfo"></span>
     <div class="print-actions">
-      <button id="pdfBtn" type="button"><span class="material-symbols-rounded" aria-hidden="true">picture_as_pdf</span> Exportar todos em PDF</button>
+      <button id="printAllBtn" type="button"><span class="material-symbols-rounded" aria-hidden="true">print</span> Imprimir todas as páginas</button>
     </div>
   </div>
   <div id="printArea" class="a4"></div>
@@ -142,7 +140,6 @@
   <button class="primary" id="codPrint"><span class="material-symbols-rounded" aria-hidden="true">print</span> Imprimir COD</button></div>
   <div class="table-wrap"><table id="codTable"></table></div>
   <div id="codPrintArea" class="cod-print-area" aria-hidden="true"></div>
-  <div id="pdfRenderArea" aria-hidden="true"></div>
   <div class="page-nav"><button class="secondary" data-prev="impressao"><span class="material-symbols-rounded" aria-hidden="true">arrow_back</span> RETROCEDER</button></div>
 </section>
 </main>

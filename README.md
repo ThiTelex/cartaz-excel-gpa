@@ -8,5 +8,10 @@
 
 Senha atual permanece no `config.json`.
 
-## v25 — ajuste de corte central 4×2
-Na impressão A4 horizontal, as quatro colunas usam 73,75 mm cada, com um vão central de 2 mm entre as colunas 2 e 3. As colunas 3 e 4 recebem deslocamento de 2 mm. As margens externas permanecem alinhadas às bordas da folha (73,75 × 4 + 2 = 297 mm). O mesmo ajuste é aplicado ao PDF.
+
+## v26
+- Baseada diretamente na v24 (grade física A4 4×2).
+- Removida a opção Exportar PDF e as bibliotecas html2canvas/jsPDF.
+- Adicionado o botão “Imprimir todas as páginas”.
+- A impressão de todas as páginas é montada em um contêiner separado somente no momento da impressão; a pré-visualização continua exibindo apenas a página selecionada.
+- Após a impressão, o contêiner de impressão múltipla é limpo para não interferir na pré-visualização seguinte.

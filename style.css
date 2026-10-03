@@ -53,12 +53,11 @@
 
 /* COD: tela compacta */
 .cod-category th{background:#e5e7eb!important;font-size:12px;text-transform:uppercase;letter-spacing:.3px}
-.cod-print-area,#pdfRenderArea{position:absolute;left:-100000px;top:0;visibility:hidden}
+.cod-print-area{position:absolute;left:-100000px;top:0;visibility:hidden}
 .cod-print-page{width:297mm;height:210mm;background:#fff;display:grid;grid-template-columns:repeat(5,1fr);grid-auto-rows:14mm;gap:2mm;padding:5mm;align-content:start}
 .cod-print-item{border:1px solid #c9c9c9;padding:1.5mm;display:flex;flex-direction:column;justify-content:center;overflow:hidden}
 .cod-print-plu{font-size:8pt;font-weight:800;margin-bottom:.5mm}.cod-print-desc{font-size:6.5pt;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;margin-top:.5mm}.cod-print-item .barcode-svg{height:7mm;width:100%}
 .cod-print-category{grid-column:1/-1;font-size:8pt;font-weight:900;padding:1mm 0;border-bottom:1px solid #111;align-self:end}
-.pdf-rendering{position:absolute!important;left:-100000px!important;top:0!important;visibility:visible!important}.pdf-page{width:297mm!important;height:210mm!important;min-width:297mm!important;min-height:210mm!important;max-width:297mm!important;max-height:210mm!important;margin:0!important;padding:4mm!important;display:grid!important;grid-template-columns:repeat(4,1fr)!important;grid-template-rows:repeat(2,1fr)!important;gap:2mm!important;background:#fff!important;box-shadow:none!important}.pdf-page .cartaz{min-width:0;min-height:0;border:0!important;overflow:hidden}
 @media(max-width:800px){.print-actions{margin-left:0;width:100%}.print-controls{align-items:flex-start}}
 
 @media print{
@@ -72,11 +71,12 @@
   body.printing-cod #codPrintArea .barcode-svg{height:7mm!important}
   body.printing-cod #codPrintArea .cod-print-desc{font-size:6pt!important}
 
-  /* Imprimir todas as páginas: cria uma folha A4 para cada bloco */
+  /* Imprimir todas as páginas: usa uma folha A4 física por bloco, sem alterar a pré-visualização. */
   body.printing-all main>#impressao #printArea{display:none!important}
-  body.printing-all main>#impressao #printAllArea{display:block!important}
-  body.printing-all main>#impressao #printAllArea .a4{display:grid!important;width:297mm!important;height:210mm!important;min-width:297mm!important;min-height:210mm!important;max-width:297mm!important;max-height:210mm!important;margin:0!important;padding:4mm!important;gap:2mm!important;box-shadow:none!important;overflow:hidden!important;page-break-after:always!important;break-after:page!important}
+  body.printing-all main>#impressao #printAllArea{display:block!important;position:static!important;visibility:visible!important}
+  body.printing-all main>#impressao #printAllArea .a4{display:grid!important;width:297mm!important;height:210mm!important;min-width:297mm!important;min-height:210mm!important;max-width:297mm!important;max-height:210mm!important;margin:0!important;padding:0!important;gap:0!important;grid-template-columns:repeat(4,74.25mm)!important;grid-template-rows:repeat(2,105mm)!important;box-shadow:none!important;overflow:hidden!important;page-break-after:always!important;break-after:page!important}
   body.printing-all main>#impressao #printAllArea .a4:last-child{page-break-after:auto!important;break-after:auto!important}
+  body.printing-all main>#impressao #printAllArea .cartaz{width:74.25mm!important;height:105mm!important;min-width:74.25mm!important;max-width:74.25mm!important;min-height:105mm!important;max-height:105mm!important;margin:0!important;border:0!important;overflow:hidden!important}
 }
 
 
@@ -265,8 +265,6 @@ body.auth-locked>header,body.auth-locked>.steps,body.auth-locked>main,body.auth-
   body:not(.printing-cod) #impressao .cartaz{border:0!important}
   body:not(.printing-cod) #impressao .promo-box{background:#202124!important;color:#fff!important}
 }
-.pdf-rendering .cartaz{border:0!important}
-.pdf-rendering .promo-box{background:#202124!important;color:#fff!important}
 
 
 /* v23: caixa da dinâmica construída com SVG para não depender da opção
@@ -279,9 +277,6 @@ body.auth-locked>header,body.auth-locked>.steps,body.auth-locked>main,body.auth-
   body:not(.printing-cod) #impressao .promo-box-bg{display:block!important;visibility:visible!important}
   body:not(.printing-cod) #impressao .promo-box-text{color:#fff!important;visibility:visible!important}
 }
-.pdf-rendering .promo-box{background:transparent!important}
-.pdf-rendering .promo-box-bg{display:block!important}
-.pdf-rendering .promo-box-text{color:#fff!important}
 
 /* v24 — grade física A4 4x2: cada posição ocupa exatamente 1/4 x 1/2 da folha.
    A área de corte não usa padding/gap para evitar o recuo da 4ª coluna. */
@@ -298,16 +293,16 @@ body.auth-locked>header,body.auth-locked>.steps,body.auth-locked>main,body.auth-
     padding:0!important;
     margin:0!important;
     gap:0!important;
-    grid-template-columns:repeat(4,73.75mm)!important;
+    grid-template-columns:repeat(4,74.25mm)!important;
     grid-template-rows:repeat(2,105mm)!important;
     box-shadow:none!important;
     overflow:hidden!important;
   }
   body:not(.printing-cod) #impressao .cartaz{
-    width:73.75mm!important;
+    width:74.25mm!important;
     height:105mm!important;
-    min-width:73.75mm!important;
-    max-width:73.75mm!important;
+    min-width:74.25mm!important;
+    max-width:74.25mm!important;
     min-height:105mm!important;
     max-height:105mm!important;
     margin:0!important;
@@ -316,44 +311,3 @@ body.auth-locked>header,body.auth-locked>.steps,body.auth-locked>main,body.auth-
   }
 }
 
-/* v24 — o PDF também usa a grade física inteira do A4, sem recuo nas bordas. */
-.pdf-rendering .pdf-page{
-  width:297mm!important;
-  height:210mm!important;
-  min-width:297mm!important;
-  min-height:210mm!important;
-  max-width:297mm!important;
-  max-height:210mm!important;
-  padding:0!important;
-  margin:0!important;
-  gap:0!important;
-  grid-template-columns:repeat(4,73.75mm)!important;
-  grid-template-rows:repeat(2,105mm)!important;
-}
-.pdf-rendering .pdf-page .cartaz{
-  width:73.75mm!important;
-  height:105mm!important;
-  min-width:73.75mm!important;
-  max-width:73.75mm!important;
-  min-height:105mm!important;
-  max-height:105mm!important;
-  margin:0!important;
-  border:0!important;
-}
-
-
-/* v25 — pequeno vão central entre as colunas 2 e 3, preservando as margens externas.
-   Cada cartaz passa a 73,75 mm; as colunas 3 e 4 são deslocadas 2 mm para a direita.
-   Resultado: 73,75 x 4 + 2 mm = 297 mm, sem empurrar a coluna 1 para dentro nem deixar a 4ª recuada. */
-@media print{
-  body:not(.printing-cod) #impressao .a4 .cartaz:nth-child(4n+3),
-  body:not(.printing-cod) #impressao .a4 .cartaz:nth-child(4n+4),
-  body:not(.printing-cod) #impressao #printAllArea .a4 .cartaz:nth-child(4n+3),
-  body:not(.printing-cod) #impressao #printAllArea .a4 .cartaz:nth-child(4n+4){
-    margin-left:2mm!important;
-  }
-}
-.pdf-rendering .pdf-page .cartaz:nth-child(4n+3),
-.pdf-rendering .pdf-page .cartaz:nth-child(4n+4){
-  margin-left:2mm!important;
-}
