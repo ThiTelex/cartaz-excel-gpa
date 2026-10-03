@@ -122,10 +122,11 @@ $("search").oninput=renderTable;$("dynFilter").onchange=renderTable;
 document.querySelectorAll(".mode").forEach(b=>b.onclick=()=>{document.querySelectorAll(".mode").forEach(x=>x.classList.remove("active"));b.classList.add("active");mode=b.dataset.mode;});
 $("rebuild").onclick=()=>{buildCarts();showPage("impressao")};
 $("printBtn").onclick=()=>printSection("impressao");
+$("printAllBtn").onclick=printAllSections;
 $("prevPage").onclick=()=>changePage(-1);
 $("nextPage").onclick=()=>changePage(1);
 $("codPrint").onclick=()=>printSection("cod");
-window.addEventListener("afterprint",()=>{document.body.classList.remove("printing-cod","printing-all");$("printAllArea").innerHTML="";$("printAllArea").setAttribute("aria-hidden","true");printMode="current"});
+window.addEventListener("afterprint",()=>{document.body.classList.remove("printing-cod","printing-all");$("printAllArea").innerHTML="";printMode="current"});
 function printSection(section){
   printMode="current";
   document.body.classList.toggle("printing-cod",section==="cod");
@@ -331,7 +332,6 @@ function renderCOD(){
 function printAllSections(){
   if(!carts.length){alert("Gere os cartazes primeiro.");return}
   renderAllPrintPages();
-  printMode="all";
   document.body.classList.add("printing-all");
   window.print();
 }

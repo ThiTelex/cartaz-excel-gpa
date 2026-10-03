@@ -71,16 +71,10 @@
   body.printing-cod #codPrintArea .barcode-svg{height:7mm!important}
   body.printing-cod #codPrintArea .cod-print-desc{font-size:6pt!important}
 
-  /* Imprimir todas as páginas: usa uma folha A4 física por bloco, sem alterar a pré-visualização. */
-  body.printing-all main>#impressao #printArea{display:none!important}
-  body.printing-all main>#impressao #printAllArea{display:block!important;position:static!important;visibility:visible!important}
-  body.printing-all main>#impressao #printAllArea .a4{display:grid!important;width:297mm!important;height:210mm!important;min-width:297mm!important;min-height:210mm!important;max-width:297mm!important;max-height:210mm!important;margin:0!important;padding:0!important;gap:0!important;grid-template-columns:repeat(4,74.25mm)!important;grid-template-rows:repeat(2,105mm)!important;box-shadow:none!important;overflow:hidden!important;page-break-after:always!important;break-after:page!important}
-  body.printing-all main>#impressao #printAllArea .a4:last-child{page-break-after:auto!important;break-after:auto!important}
-  body.printing-all main>#impressao #printAllArea .cartaz{width:74.25mm!important;height:105mm!important;min-width:74.25mm!important;max-width:74.25mm!important;min-height:105mm!important;max-height:105mm!important;margin:0!important;border:0!important;overflow:hidden!important}
 }
 
 
-/* v7: preserva toda a paginação/Imprimir todas/PDF da v5 e corrige o COD. */
+/* v7: preserva a paginação/Imprimir todas e corrige o COD. */
 .cod-desc{font-weight:700;white-space:normal!important;min-width:0}
 .cod-plu{font-weight:800;font-variant-numeric:tabular-nums}
 .cod-category td{font-weight:900;background:#eef2f7;border-top:2px solid #9ca3af;padding:7px 10px}
@@ -96,15 +90,9 @@
   body.printing-cod #codPrintArea .cod-print-item{break-inside:avoid;page-break-inside:avoid}
 }
 
-/* v8 - somente Imprimir e Exportar PDF; a paginação continua apenas na pré-visualização. */
+/* v8 - somente Imprimir e Imprimir todas; a paginação continua apenas na pré-visualização. */
 .cod-print-desc{font-size:8pt!important;font-weight:800!important;white-space:normal!important;overflow:hidden;text-overflow:ellipsis}
 .cod-print-plu{font-size:6.5pt!important;font-weight:400!important;margin-top:.5mm}
-@media print{
-  /* A borda é útil somente na pré-visualização; o cartaz físico já possui seu contorno. */
-  body:not(.printing-cod) #impressao .cartaz{border:0!important}
-  body:not(.printing-cod) #impressao .a4{page-break-after:auto!important;break-after:auto!important}
-  body:not(.printing-cod) #impressao #printAllArea{display:none!important}
-}
 
 
 /* Modelo A7: hierarquia visual conforme o modelo físico enviado. */
@@ -259,7 +247,7 @@ body.auth-locked>header,body.auth-locked>.steps,body.auth-locked>main,body.auth-
 }
 
 
-/* v21: o contorno externo do cartaz A7 não sai na impressão nem no PDF.
+/* v21: o contorno externo do cartaz A7 não sai na impressão.
    A caixa preta da dinâmica (.promo-box) permanece normalmente. */
 @media print{
   body:not(.printing-cod) #impressao .cartaz{border:0!important}
@@ -311,3 +299,29 @@ body.auth-locked>header,body.auth-locked>.steps,body.auth-locked>main,body.auth-
   }
 }
 
+
+/* v26 — imprimir todas as páginas sem alterar a pré-visualização atual.
+   printAllArea só fica visível durante a chamada de impressão. */
+#printAllArea{display:none!important}
+@media print{
+  body.printing-all #impressao #printArea{display:none!important}
+  body.printing-all #impressao #printAllArea{display:block!important}
+  body.printing-all #impressao #printAllArea .a4{
+    display:grid!important;
+    width:297mm!important;height:210mm!important;
+    min-width:297mm!important;min-height:210mm!important;
+    max-width:297mm!important;max-height:210mm!important;
+    padding:0!important;margin:0!important;gap:0!important;
+    box-shadow:none!important;overflow:hidden!important;
+    grid-template-columns:repeat(4,74.25mm)!important;
+    grid-template-rows:repeat(2,105mm)!important;
+    page-break-after:always!important;break-after:page!important;
+  }
+  body.printing-all #impressao #printAllArea .a4:last-child{page-break-after:auto!important;break-after:auto!important}
+  body.printing-all #impressao #printAllArea .cartaz{
+    width:74.25mm!important;height:105mm!important;
+    min-width:74.25mm!important;max-width:74.25mm!important;
+    min-height:105mm!important;max-height:105mm!important;
+    margin:0!important;border:0!important;overflow:hidden!important;
+  }
+}
