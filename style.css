@@ -58,7 +58,7 @@
 .cod-print-item{border:1px solid #c9c9c9;padding:1.5mm;display:flex;flex-direction:column;justify-content:center;overflow:hidden}
 .cod-print-plu{font-size:8pt;font-weight:800;margin-bottom:.5mm}.cod-print-desc{font-size:6.5pt;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;margin-top:.5mm}.cod-print-item .barcode-svg{height:7mm;width:100%}
 .cod-print-category{grid-column:1/-1;font-size:8pt;font-weight:900;padding:1mm 0;border-bottom:1px solid #111;align-self:end}
-.pdf-rendering{position:absolute!important;left:-100000px!important;top:0!important;visibility:visible!important}.pdf-page{width:297mm!important;height:210mm!important;min-width:297mm!important;min-height:210mm!important;max-width:297mm!important;max-height:210mm!important;margin:0!important;padding:4mm!important;display:grid!important;grid-template-columns:repeat(4,1fr)!important;grid-template-rows:repeat(2,1fr)!important;gap:2mm!important;background:#fff!important;box-shadow:none!important}.pdf-page .cartaz{min-width:0;min-height:0;border:1px solid #000;overflow:hidden}
+.pdf-rendering{position:absolute!important;left:-100000px!important;top:0!important;visibility:visible!important}.pdf-page{width:297mm!important;height:210mm!important;min-width:297mm!important;min-height:210mm!important;max-width:297mm!important;max-height:210mm!important;margin:0!important;padding:4mm!important;display:grid!important;grid-template-columns:repeat(4,1fr)!important;grid-template-rows:repeat(2,1fr)!important;gap:2mm!important;background:#fff!important;box-shadow:none!important}.pdf-page .cartaz{min-width:0;min-height:0;border:0!important;overflow:hidden}
 @media(max-width:800px){.print-actions{margin-left:0;width:100%}.print-controls{align-items:flex-start}}
 
 @media print{
@@ -257,3 +257,13 @@ body.auth-locked>header,body.auth-locked>.steps,body.auth-locked>main,body.auth-
   body:not(.printing-cod) #impressao .a4{break-inside:avoid!important;page-break-inside:avoid!important;page-break-after:auto!important;break-after:auto!important}
   body:not(.printing-cod) #impressao .a4{overflow:hidden!important}
 }
+
+
+/* v21: o contorno externo do cartaz A7 não sai na impressão nem no PDF.
+   A caixa preta da dinâmica (.promo-box) permanece normalmente. */
+@media print{
+  body:not(.printing-cod) #impressao .cartaz{border:0!important}
+  body:not(.printing-cod) #impressao .promo-box{background:#202124!important;color:#fff!important}
+}
+.pdf-rendering .cartaz{border:0!important}
+.pdf-rendering .promo-box{background:#202124!important;color:#fff!important}

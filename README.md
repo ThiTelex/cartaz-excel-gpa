@@ -149,3 +149,9 @@ Como este é um aplicativo HTML/JavaScript executado no navegador, `config.json`
 - A senha lida do JSON é normalizada com `trim()`, evitando falhas por espaços acidentais.
 - Erros de carregamento do JSON ficam registrados no console para diagnóstico.
 - A senha continua sendo exclusivamente a propriedade `senha` do `config.json`; o valor atual permanece `1833`.
+
+
+## v21 — impressão e PDF
+- O contorno externo de cada cartaz A7 não é impresso e também não aparece no PDF exportado.
+- A caixa preta da dinâmica (`promo-box`) continua sendo impressa/exportada.
+- `Exportar todos em PDF` gera um único arquivo PDF com **todos os cartazes**, em páginas A4 horizontais, 8 cartazes por página. Não depende da página atualmente selecionada na pré-visualização.

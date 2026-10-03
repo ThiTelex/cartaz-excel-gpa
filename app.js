@@ -349,7 +349,7 @@ async function exportCartazesPDF(){
     const base=(selectedFile?.name||"cartazes").replace(/\.[^.]+$/i,"");
     pdf.save(`${base}-A7-cartazes.pdf`);
   }catch(err){console.error(err);alert("Não foi possível gerar o PDF.\n\n"+(err.message||err));}
-  finally{host.innerHTML="";host.classList.remove("pdf-rendering");btn.disabled=false;btn.textContent="Exportar PDF"}
+  finally{host.innerHTML="";host.classList.remove("pdf-rendering");btn.disabled=false;btn.textContent="Exportar todos em PDF"}
 }
 
 // Code 39 em SVG: não depende de fonte instalada no Android/Windows.
