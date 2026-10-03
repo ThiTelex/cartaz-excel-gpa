@@ -282,3 +282,61 @@ body.auth-locked>header,body.auth-locked>.steps,body.auth-locked>main,body.auth-
 .pdf-rendering .promo-box{background:transparent!important}
 .pdf-rendering .promo-box-bg{display:block!important}
 .pdf-rendering .promo-box-text{color:#fff!important}
+
+/* v24 — grade física A4 4x2: cada posição ocupa exatamente 1/4 x 1/2 da folha.
+   A área de corte não usa padding/gap para evitar o recuo da 4ª coluna. */
+@media print{
+  @page{size:A4 landscape;margin:0}
+  body:not(.printing-cod) #impressao .a4,
+  body:not(.printing-cod) #impressao #printAllArea .a4{
+    width:297mm!important;
+    height:210mm!important;
+    min-width:297mm!important;
+    min-height:210mm!important;
+    max-width:297mm!important;
+    max-height:210mm!important;
+    padding:0!important;
+    margin:0!important;
+    gap:0!important;
+    grid-template-columns:repeat(4,74.25mm)!important;
+    grid-template-rows:repeat(2,105mm)!important;
+    box-shadow:none!important;
+    overflow:hidden!important;
+  }
+  body:not(.printing-cod) #impressao .cartaz{
+    width:74.25mm!important;
+    height:105mm!important;
+    min-width:74.25mm!important;
+    max-width:74.25mm!important;
+    min-height:105mm!important;
+    max-height:105mm!important;
+    margin:0!important;
+    border:0!important;
+    overflow:hidden!important;
+  }
+}
+
+/* v24 — o PDF também usa a grade física inteira do A4, sem recuo nas bordas. */
+.pdf-rendering .pdf-page{
+  width:297mm!important;
+  height:210mm!important;
+  min-width:297mm!important;
+  min-height:210mm!important;
+  max-width:297mm!important;
+  max-height:210mm!important;
+  padding:0!important;
+  margin:0!important;
+  gap:0!important;
+  grid-template-columns:repeat(4,74.25mm)!important;
+  grid-template-rows:repeat(2,105mm)!important;
+}
+.pdf-rendering .pdf-page .cartaz{
+  width:74.25mm!important;
+  height:105mm!important;
+  min-width:74.25mm!important;
+  max-width:74.25mm!important;
+  min-height:105mm!important;
+  max-height:105mm!important;
+  margin:0!important;
+  border:0!important;
+}
